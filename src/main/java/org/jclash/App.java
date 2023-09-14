@@ -16,10 +16,14 @@
 
 package org.jclash;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws ClientProtocolException, IOException
     {
-       
+      
     }
 }
