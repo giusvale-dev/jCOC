@@ -40,14 +40,12 @@ public class Account {
 
     }
 
-
     /**
      * @return the status
      */
     public AuthCodeResponse getStatus() {
         return status;
     }
-
 
     /**
      * @param status the status to set
@@ -56,14 +54,12 @@ public class Account {
         this.status = status;
     }
 
-
     /**
      * @return the sessionExpiresInSeconds
      */
     public int getSessionExpiresInSeconds() {
         return sessionExpiresInSeconds;
     }
-
 
     /**
      * @param sessionExpiresInSeconds the sessionExpiresInSeconds to set
@@ -72,14 +68,12 @@ public class Account {
         this.sessionExpiresInSeconds = sessionExpiresInSeconds;
     }
 
-
     /**
      * @return the keys
      */
     public List<Key> getKeys() {
         return keys;
     }
-
 
     /**
      * @param keys the keys to set
@@ -88,14 +82,12 @@ public class Account {
         this.keys = keys;
     }
 
-
     /**
      * @return the key
      */
     public Key getKey() {
         return key;
     }
-
 
     /**
      * @param key the key to set

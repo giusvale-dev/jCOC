@@ -16,3 +16,7 @@ JCoc jcoc = new JCoc("username", "password"); //If you want generate a new API_T
 //Use it
 jcoc.clanWar();
 ```
+
+# How to test
+Before to test is needed to add your credentials in the application.properties file.
+By default this file is ignored from GIT (added in the .gitignore) then you can run the tests in your ide or with mvn command.
