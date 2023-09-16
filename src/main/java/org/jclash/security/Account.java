@@ -33,6 +33,8 @@ public class Account {
     @JsonProperty
     private List<Key> keys;
 
+    @JsonProperty
+    private Key key; //Field used only during the creation of a new key
 
     public Account() {
 
@@ -85,8 +87,21 @@ public class Account {
     public void setKeys(List<Key> keys) {
         this.keys = keys;
     }
-    
 
 
+    /**
+     * @return the key
+     */
+    public Key getKey() {
+        return key;
+    }
+
+
+    /**
+     * @param key the key to set
+     */
+    public void setKey(Key key) {
+        this.key = key;
+    }
 
 }
