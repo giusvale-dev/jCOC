@@ -32,3 +32,4 @@ target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/create
 target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 target/surefire-reports/org.jclash.ClanTest.txt
 target/surefire-reports/TEST-org.jclash.ClanTest.xml
+src/main/resources/application.properties
