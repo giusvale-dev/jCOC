@@ -15,12 +15,8 @@
  */
 
 package org.jclash;
-
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -39,31 +35,29 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-public class ClanTest 
-{
+public class ClanTest {
 
     private JCoc jcoc = null;
 
     @Before
     public void setUpTest() throws IOException, JCocException {
 
-        //You need to insert the values in the application.properties
+        // You need to insert the values in the application.properties
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
+        if (inputStream == null) {
+            throw new IOException(
+                    "Please create an application.properties file in src/main/resource and add the properties username and password with your personal values!");
+        }
 
         Properties properties = new Properties();
         properties.load(inputStream);
-        
+
         String username = properties.getProperty("username");
         String password = properties.getProperty("password");
 
         jcoc = new JCoc(username, password);
 
     }
-
-
-
-
 
     /**
      * Testing generic Clan deserialization
@@ -79,12 +73,13 @@ public class ClanTest
 
     /**
      * Test all properties during deserialization process are read correctly
+     * 
      * @throws IOException
      * @throws DatabindException
      * @throws StreamReadException
      */
     @Test
-     public void testClanDeserialize() throws StreamReadException, DatabindException, IOException {
+    public void testClanDeserialize() throws StreamReadException, DatabindException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("clan.json");
@@ -146,7 +141,6 @@ public class ClanTest
 
     }
 
-
     @Test
     public void testClanInfo() {
 
@@ -158,8 +152,8 @@ public class ClanTest
             assertEquals(clan.getTag(), clanTag);
         } catch (JCocException e) {
             e.printStackTrace();
-           Assert.fail();
+            Assert.fail();
         }
-    } 
+    }
 
 }
