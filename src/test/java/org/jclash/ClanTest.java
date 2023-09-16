@@ -20,14 +20,19 @@ package org.jclash;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 import org.jclash.domain.Clan;
 import org.jclash.domain.ClanType;
 import org.jclash.domain.Element;
 import org.jclash.domain.Member;
 import org.jclash.domain.PlayerHouse;
+import org.jclash.exceptions.JCocException;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -37,6 +42,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ClanTest 
 {
+
+    private JCoc jcoc = null;
+
+    @Before
+    public void setUpTest() throws IOException, JCocException {
+
+        //You need to insert the values in the application.properties
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
+
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        
+        String username = properties.getProperty("username");
+        String password = properties.getProperty("password");
+
+        jcoc = new JCoc(username, password);
+
+    }
+
+
+
+
 
     /**
      * Testing generic Clan deserialization
@@ -57,7 +84,7 @@ public class ClanTest
      * @throws StreamReadException
      */
     @Test
-     public void testClanProperties() throws StreamReadException, DatabindException, IOException {
+     public void testClanDeserialize() throws StreamReadException, DatabindException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("clan.json");
@@ -117,6 +144,22 @@ public class ClanTest
         assertEquals(44000030, m.getBuilderBaseLeague().getId());
         assertEquals("Titanium League II", m.getBuilderBaseLeague().getName());
 
-     }
+    }
+
+
+    @Test
+    public void testClanInfo() {
+
+        try {
+            assertNotNull(this.jcoc);
+            String clanTag = "#VLL2CUVJ";
+            Clan clan = this.jcoc.getClanInfo(clanTag);
+            assertNotNull(clan);
+            assertEquals(clan.getTag(), clanTag);
+        } catch (JCocException e) {
+            e.printStackTrace();
+           Assert.fail();
+        }
+    } 
 
 }

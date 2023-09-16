@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -72,6 +73,9 @@ public class AuthenticationService {
             httpPost.setHeader("Content-type", "application/json");
 
             HttpResponse response = httpClient.execute(httpPost);
+            if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                throw new JCocException("Username and/or password are not valid");
+            }
 
             // Retrive cookie
             String sessionId = "";
@@ -108,6 +112,10 @@ public class AuthenticationService {
             httpPost.setHeader("Cookie", sessionId);
             
             HttpResponse response = httpClient.execute(httpPost);
+            int httpResponseCode = response.getStatusLine().getStatusCode();
+            if(httpResponseCode != HttpStatus.SC_OK) {
+                throw new JCocException("The COC Server responds with a HTTP CODE = " + httpResponseCode);
+            }
 
             HttpEntity entity = response.getEntity();
             InputStream is = entity.getContent();
@@ -115,7 +123,6 @@ public class AuthenticationService {
             ObjectMapper mapper = new ObjectMapper();
             Account result = mapper.readValue(is, Account.class);
             return result;
-
 
         } catch(Exception e) {
             throw new JCocException(e.getMessage());
@@ -156,6 +163,10 @@ public class AuthenticationService {
             
             httpPost.setEntity(stringEntity);
             HttpResponse response = httpClient.execute(httpPost);
+            int httpResponseCode = response.getStatusLine().getStatusCode();
+            if(httpResponseCode != HttpStatus.SC_OK) {
+                throw new JCocException("The COC Server responds with a HTTP CODE = " + httpResponseCode);
+            }
             
             //Check response OK and return the created key
             HttpEntity entity = response.getEntity();
