@@ -18,6 +18,9 @@ package org.jclash.security;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Key {
     
     private String id;
@@ -25,7 +28,7 @@ public class Key {
     private String tier;
     private String name;
     private String description;
-    private String origins;
+    private List<String> origins;
     private List<String> scopes;
     private List<String> cidrRanges;
     private String validUntil;
@@ -120,7 +123,7 @@ public class Key {
     /**
      * @return the origins
      */
-    public String getOrigins() {
+    public List<String> getOrigins() {
         return origins;
     }
 
@@ -128,7 +131,7 @@ public class Key {
     /**
      * @param origins the origins to set
      */
-    public void setOrigins(String origins) {
+    public void setOrigins(List<String> origins) {
         this.origins = origins;
     }
 

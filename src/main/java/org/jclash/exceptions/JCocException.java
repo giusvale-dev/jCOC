@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package org.jclash;
+package org.jclash.exceptions;
 
-import java.io.IOException;
+public class JCocException extends Exception {
 
-import org.apache.http.client.ClientProtocolException;
-
-public class App 
-{
-    public static void main( String[] args ) throws ClientProtocolException, IOException
-    {
-      
+    public JCocException(String message) {
+        super(message);
     }
+
+    public JCocException(Throwable t) {
+        super(t);
+    }
+    
 }
