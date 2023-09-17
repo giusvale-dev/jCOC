@@ -33,6 +33,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.jclash.domain.Clan;
 import org.jclash.domain.Member;
 import org.jclash.domain.Search;
+import org.jclash.domain.War;
 import org.jclash.exceptions.JCocException;
 
 import com.fasterxml.jackson.databind.JavaType;
@@ -50,11 +51,17 @@ public class ClanService {
 
 
     /**
-     * Get clan informations
-     * @clanTag the clan tag
-     * @return the clan informations
+     * Get information about a single clan by clan tag. 
+     * Clan tags can be found using clan search operation. 
+     * Note that clan tags start with hash character '#' and that needs 
+     * to be URL-encoded properly to work in URL, 
+     * so for example clan tag '#2ABC' would become '%232ABC' in the URL.
+     * 
+     * @clanTag Tag of the clan.
+     * @return The clan informations
+     * @throws JCocException if an error occurs
      */
-    public Clan getClanInfos(String clanTag) throws JCocException {
+    public Clan clanInfo(String clanTag) throws JCocException {
         
         try {
 
@@ -80,19 +87,21 @@ public class ClanService {
         }
     }
 
- /**
-  * Retrieve the members of a clan.
-  * It is possible to use this method with the paging, limiting the request with the limit param, 
-  * and change page with the after and before parameters.
-  * 
-  * @param clanTag The target clan tag
-  * @param limit If you want to limit your search you can set this value
-  * @param after If is present the Page object in the response, you can refer to the cursor after to go in next page
-  * @param before If is present the Page object in the response, you can refer to the cursor before to go in previous page
-  * @return The list of the clan members (with the page cursors to make the pagination)
-  * @throws JCocException if an error occurs
-  */
-    public Search<Member> listClanMember(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
+    /**
+     * List clan members.
+     * 
+     * @param clanTag Tag of the clan
+     * @param limit Limit the number of items returned in the response.
+     * @param before Return only items that occur before this marker. 
+     *               Before marker can be found from the response, inside the 'paging' property. 
+     *               Note that only after or before can be specified for a request, not both.
+     * @param after Return only items that occur after this marker. 
+     *              Before marker can be found from the response, inside the 'paging' property. 
+     *              Note that only after or before can be specified for a request, not both.
+     * @return The clan members
+     * @throws JCocException if an error occurs
+     */
+    public Search<Member> clanMembers(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
 
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
@@ -128,6 +137,63 @@ public class ClanService {
             ObjectMapper mapper = new ObjectMapper();
             JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, Member.class);
             Search<Member> resultSearch = mapper.readValue(is, type);
+            return resultSearch;
+
+        } catch(Exception e) {
+            throw new JCocException(e);
+        }
+    }
+
+    /**
+     * Retrieve clan's clan war log
+     * 
+     * @param clanTag Tag of the clan
+     * @param limit Limit the number of items returned in the response.
+     * @param after Return only items that occur after this marker. 
+     *              Before marker can be found from the response, inside the 'paging' property. 
+     *              Note that only after or before can be specified for a request, not both.
+     * @param before Return only items that occur before this marker. 
+     *               Before marker can be found from the response, inside the 'paging' property. 
+     *               Note that only after or before can be specified for a request, not both.
+     * @return the war log of the clan related to the clanTag
+     * @throws JCocException if an error occurs
+     */
+    public Search<War> warLog(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
+
+        try {
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            
+            HttpGet httpGet = new HttpGet(BASE_CLAN_URI + 
+                                          URLEncoder.encode(clanTag, StandardCharsets.UTF_8.toString())
+                                          + "/warlog");
+                          
+            URIBuilder uriBuilder = new URIBuilder(httpGet.getURI()); 
+            uriBuilder.addParameter("limit", limit + "");
+            if(after != null && !after.isEmpty()) {
+                uriBuilder.addParameter("after", after);
+            }
+            
+            if(before != null && !before.isEmpty()) {
+                uriBuilder.addParameter("before", before);
+            }                                                    
+            
+            URI uri = uriBuilder.build();
+            httpGet.setURI(uri);
+
+            httpGet.setHeader("Authorization", "Bearer " + API_TOKEN);
+        
+            HttpResponse response = httpClient.execute(httpGet);
+            int httpResponseCode = response.getStatusLine().getStatusCode();
+            if(httpResponseCode != HttpStatus.SC_OK) {
+               throw new JCocException("Error during warLog method, COC responds with HTTP code " + response.getStatusLine().getStatusCode());
+            }
+
+            HttpEntity entity = response.getEntity();
+            InputStream is = entity.getContent();
+
+            ObjectMapper mapper = new ObjectMapper();
+            JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, War.class);
+            Search<War> resultSearch = mapper.readValue(is, type);
             return resultSearch;
 
         } catch(Exception e) {

@@ -28,6 +28,21 @@ public class Clan {
     public Clan() {
     }
 
+    /** Fields used in clan war **/
+    @JsonProperty
+    private int attacks;
+
+    @JsonProperty
+    private int starts;
+
+    @JsonProperty
+    private double destructionPercentage;
+
+    @JsonProperty
+    private int expEarned;
+
+    /** End fields used in clan war **/
+
     @JsonProperty
     private String tag;
 
@@ -435,5 +450,189 @@ public class Clan {
     public void setMembers(int members) {
         this.members = members;
     }
-    
+
+    /**
+     * @return the attacks
+     */
+    public int getAttacks() {
+        return attacks;
+    }
+
+    /**
+     * @param attacks the attacks to set
+     */
+    public void setAttacks(int attacks) {
+        this.attacks = attacks;
+    }
+
+    /**
+     * @return the starts
+     */
+    public int getStarts() {
+        return starts;
+    }
+
+    /**
+     * @param starts the starts to set
+     */
+    public void setStarts(int starts) {
+        this.starts = starts;
+    }
+
+    /**
+     * @return the destructionPercentage
+     */
+    public double getDestructionPercentage() {
+        return destructionPercentage;
+    }
+
+    /**
+     * @param destructionPercentage the destructionPercentage to set
+     */
+    public void setDestructionPercentage(double destructionPercentage) {
+        this.destructionPercentage = destructionPercentage;
+    }
+
+    /**
+     * @return the expEarned
+     */
+    public int getExpEarned() {
+        return expEarned;
+    }
+
+    /**
+     * @param expEarned the expEarned to set
+     */
+    public void setExpEarned(int expEarned) {
+        this.expEarned = expEarned;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + attacks;
+        result = prime * result + starts;
+        long temp;
+        temp = Double.doubleToLongBits(destructionPercentage);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + expEarned;
+        result = prime * result + ((tag == null) ? 0 : tag.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((location == null) ? 0 : location.hashCode());
+        result = prime * result + (isFamilyFriendly ? 1231 : 1237);
+        result = prime * result + ((badgeUrls == null) ? 0 : badgeUrls.hashCode());
+        result = prime * result + clanLevel;
+        result = prime * result + clanPoints;
+        result = prime * result + clanBuilderBasePoints;
+        result = prime * result + clanVersusPoints;
+        result = prime * result + clanCapitalPoints;
+        result = prime * result + ((capitalLeague == null) ? 0 : capitalLeague.hashCode());
+        result = prime * result + requiredTrophies;
+        result = prime * result + ((warFrequency == null) ? 0 : warFrequency.hashCode());
+        result = prime * result + warWinStreak;
+        result = prime * result + warWins;
+        result = prime * result + warTies;
+        result = prime * result + warLosses;
+        result = prime * result + ((warLeague == null) ? 0 : warLeague.hashCode());
+        result = prime * result + (isWarLogPublic ? 1231 : 1237);
+        result = prime * result + requiredTownhallLevel;
+        result = prime * result + members;
+        result = prime * result + ((memberList == null) ? 0 : memberList.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Clan other = (Clan) obj;
+        if (attacks != other.attacks)
+            return false;
+        if (starts != other.starts)
+            return false;
+        if (Double.doubleToLongBits(destructionPercentage) != Double.doubleToLongBits(other.destructionPercentage))
+            return false;
+        if (expEarned != other.expEarned)
+            return false;
+        if (tag == null) {
+            if (other.tag != null)
+                return false;
+        } else if (!tag.equals(other.tag))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (type != other.type)
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (location == null) {
+            if (other.location != null)
+                return false;
+        } else if (!location.equals(other.location))
+            return false;
+        if (isFamilyFriendly != other.isFamilyFriendly)
+            return false;
+        if (badgeUrls == null) {
+            if (other.badgeUrls != null)
+                return false;
+        } else if (!badgeUrls.equals(other.badgeUrls))
+            return false;
+        if (clanLevel != other.clanLevel)
+            return false;
+        if (clanPoints != other.clanPoints)
+            return false;
+        if (clanBuilderBasePoints != other.clanBuilderBasePoints)
+            return false;
+        if (clanVersusPoints != other.clanVersusPoints)
+            return false;
+        if (clanCapitalPoints != other.clanCapitalPoints)
+            return false;
+        if (capitalLeague == null) {
+            if (other.capitalLeague != null)
+                return false;
+        } else if (!capitalLeague.equals(other.capitalLeague))
+            return false;
+        if (requiredTrophies != other.requiredTrophies)
+            return false;
+        if (warFrequency != other.warFrequency)
+            return false;
+        if (warWinStreak != other.warWinStreak)
+            return false;
+        if (warWins != other.warWins)
+            return false;
+        if (warTies != other.warTies)
+            return false;
+        if (warLosses != other.warLosses)
+            return false;
+        if (warLeague == null) {
+            if (other.warLeague != null)
+                return false;
+        } else if (!warLeague.equals(other.warLeague))
+            return false;
+        if (isWarLogPublic != other.isWarLogPublic)
+            return false;
+        if (requiredTownhallLevel != other.requiredTownhallLevel)
+            return false;
+        if (members != other.members)
+            return false;
+        if (memberList == null) {
+            if (other.memberList != null)
+                return false;
+        } else if (!memberList.equals(other.memberList))
+            return false;
+        return true;
+    }
 }

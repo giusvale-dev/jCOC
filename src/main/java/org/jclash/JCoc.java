@@ -22,6 +22,7 @@ import org.jclash.coc.ClanService;
 import org.jclash.domain.Clan;
 import org.jclash.domain.Member;
 import org.jclash.domain.Search;
+import org.jclash.domain.War;
 import org.jclash.exceptions.JCocException;
 import org.jclash.security.Account;
 import org.jclash.security.AuthenticationService;
@@ -60,7 +61,7 @@ public class JCoc {
         this.username = username;
         this.password = password;
         try {
-            this.apiToken = retreiveCocAPIToken();
+            this.apiToken = retrieveCocAPIToken();
             if (this.apiToken != null) {
                 this.isValidToken = true;
             }
@@ -70,16 +71,20 @@ public class JCoc {
     }
 
     /**
-     * This method allows to retrive the mainly clan informations
+     * Get information about a single clan by clan tag. 
+     * Clan tags can be found using clan search operation. 
+     * Note that clan tags start with hash character '#' and that needs 
+     * to be URL-encoded properly to work in URL, 
+     * so for example clan tag '#2ABC' would become '%232ABC' in the URL.
      * 
-     * @param clanTag the tag related to the intrested clan 
-     * @return Clan
-     * @throws JCocException in case of errors
+     * @clanTag Tag of the clan.
+     * @return The clan informations
+     * @throws JCocException if an error occurs
      */
-    public Clan getClanInfo(@NotNull String clanTag) throws JCocException {
+    public Clan clanInfo(@NotNull String clanTag) throws JCocException {
         try {
             ClanService cs = new ClanService(this.apiToken);
-            Clan clan = cs.getClanInfos(clanTag);
+            Clan clan = cs.clanInfo(clanTag);
             return clan;
 
         } catch (Exception e) {
@@ -88,21 +93,49 @@ public class JCoc {
     }
 
     /**
-     * Search the clan members releated to the clanTag
+     * List clan members.
      * 
-     * @param clanTag the tag of the clan
-     * @param limit if you want limit the search (paging search)
-     * @param before if this field appears in the previous search, you can go back in paging search setting this value as parameter query (Prev)
-     * @param after if this field appears in the previous search, you can go next in paging search setting this value as parameter query (Next)
-     * @return The Search object with the list of items found and the curors for the next results or previous results
+     * @param clanTag Tag of the clan
+     * @param limit Limit the number of items returned in the response.
+     * @param before Return only items that occur before this marker. 
+     *               Before marker can be found from the response, inside the 'paging' property. 
+     *               Note that only after or before can be specified for a request, not both.
+     * @param after Return only items that occur after this marker. 
+     *              Before marker can be found from the response, inside the 'paging' property. 
+     *              Note that only after or before can be specified for a request, not both.
+     * @return The clan members
      * @throws JCocException if an error occurs
      */
-    public Search<Member> listClanMembers(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
+    public Search<Member> clanMembers(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
         try {
             ClanService cs = new ClanService(this.apiToken);
-            Search<Member> clanMembers = cs.listClanMember(clanTag, limit, after, before);
+            Search<Member> clanMembers = cs.clanMembers(clanTag, limit, after, before);
             return clanMembers;
 
+        } catch (Exception e) {
+           throw new JCocException(e);
+        }
+    }
+
+   /**
+     * Retrieve clan's clan war log
+     * 
+     * @param clanTag Tag of the clan
+     * @param limit Limit the number of items returned in the response.
+     * @param after Return only items that occur after this marker. 
+     *              Before marker can be found from the response, inside the 'paging' property. 
+     *              Note that only after or before can be specified for a request, not both.
+     * @param before Return only items that occur before this marker. 
+     *               Before marker can be found from the response, inside the 'paging' property. 
+     *               Note that only after or before can be specified for a request, not both.
+     * @return the war log of the clan related to the clanTag
+     * @throws JCocException if an error occurs
+     */
+    public Search<War> warLog(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
+        try {
+            ClanService cs = new ClanService(this.apiToken);
+            Search<War> warLog = cs.warLog(clanTag, limit, after, before);
+            return warLog;
         } catch (Exception e) {
            throw new JCocException(e);
         }
@@ -117,7 +150,7 @@ public class JCoc {
      * @return the COC API TOKEN
      * @throws JCocException
      */
-    private String retreiveCocAPIToken() throws JCocException {
+    private String retrieveCocAPIToken() throws JCocException {
 
         try {
             if (!isValidToken) {

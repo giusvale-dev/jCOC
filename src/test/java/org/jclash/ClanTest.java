@@ -15,14 +15,20 @@
  */
 
 package org.jclash;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -32,7 +38,9 @@ import org.jclash.domain.Element;
 import org.jclash.domain.Member;
 import org.jclash.domain.PlayerHouse;
 import org.jclash.domain.Search;
+import org.jclash.domain.War;
 import org.jclash.exceptions.JCocException;
+import org.jclash.utils.Utils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -149,7 +157,8 @@ public class ClanTest {
 
     /**
      * This method test if the Clan Info is right.
-     * After the call check if the tag of searched clan (immutable and existing) is equals
+     * After the call check if the tag of searched clan (immutable and existing) is
+     * equals
      * to the retrieved tag
      */
     @Test
@@ -157,8 +166,8 @@ public class ClanTest {
 
         try {
             assertNotNull(this.jcoc);
-            String clanTag = "#VLL2CUVJ"; //This tag refers to an existing clan and the tag is immutable
-            Clan clan = this.jcoc.getClanInfo(clanTag);
+            String clanTag = "#VLL2CUVJ"; // This tag refers to an existing clan and the tag is immutable
+            Clan clan = this.jcoc.clanInfo(clanTag);
             assertNotNull(clan);
             assertEquals(clan.getTag(), clanTag);
         } catch (JCocException e) {
@@ -169,7 +178,7 @@ public class ClanTest {
 
     /**
      * Test the clan Members search in paging mode and not
-     * The test check if the results obtained from no limited search is equal 
+     * The test check if the results obtained from no limited search is equal
      * to the paged search
      */
     @Test
@@ -178,29 +187,30 @@ public class ClanTest {
         try {
             assertNotNull(this.jcoc);
             String clanTag = "#VLL2CUVJ";
-            Search<Member> search = this.jcoc.listClanMembers(clanTag, 50, null, null);
+            Search<Member> search = this.jcoc.clanMembers(clanTag, 50, null, null);
             assertNotNull(search);
             assertNotEquals(search.getItems().size(), 0);
 
             List<Member> noPagingSearchList = search.getItems();
-            List<Member> pagingList = new ArrayList<Member>(); // a temp list to check the paging results are equals to the one shot search
+            List<Member> pagingList = new ArrayList<Member>(); // a temp list to check the paging results are equals to
+                                                               // the one shot search
 
-            //10 elements per page
+            // 10 elements per page
             int numberOfPage = (noPagingSearchList.size() / 10);
-            if(noPagingSearchList.size() % 10 != 0) {
-                numberOfPage+=1;
+            if (noPagingSearchList.size() % 10 != 0) {
+                numberOfPage += 1;
             }
 
             int currentPage = 0;
-            while(currentPage < numberOfPage) {
+            while (currentPage < numberOfPage) {
 
                 // First search
-                if(currentPage == 0) { 
-                    search = this.jcoc.listClanMembers(clanTag, 10, null, null);
+                if (currentPage == 0) {
+                    search = this.jcoc.clanMembers(clanTag, 10, null, null);
                 } else {
-                    search = this.jcoc.listClanMembers(clanTag, 10, null, search.getPaging().getCursors().getAfter());
-                } 
-                
+                    search = this.jcoc.clanMembers(clanTag, 10, null, search.getPaging().getCursors().getAfter());
+                }
+
                 assertNotNull(search);
                 assertTrue(search.getItems().size() <= 10);
                 pagingList.addAll(search.getItems());
@@ -209,11 +219,96 @@ public class ClanTest {
 
             assertTrue(noPagingSearchList.containsAll(pagingList)); // Check if the two lists are equal
 
-        } catch(JCocException e) {
+        } catch (JCocException e) {
             e.printStackTrace();
             Assert.fail();
         }
 
+    }
+
+    /**
+     * Test converting COC string date to java.util.Date
+     * @throws ParseException
+     */
+    @Test
+    public void dateConverterTest() throws ParseException {
+
+        try {
+            Date date = Utils.convertDate("20230809T111730.000Z");
+            assertNotNull(date);
+            GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+            gc.setTime(date);
+            assertEquals(gc.get(GregorianCalendar.YEAR), 2023);
+            assertEquals(gc.get(GregorianCalendar.MONTH), GregorianCalendar.AUGUST);
+            assertEquals(gc.get(GregorianCalendar.DAY_OF_MONTH), 9);
+            assertEquals(gc.get(GregorianCalendar.HOUR_OF_DAY), 11);
+            assertEquals(gc.get(GregorianCalendar.MINUTE), 17);
+            assertEquals(gc.get(GregorianCalendar.SECOND), 30);
+
+            date = Utils.convertDate("20200618T183601.000Z");
+            assertNotNull(date);
+            gc.setTime(date);
+            assertEquals(gc.get(GregorianCalendar.YEAR), 2020);
+            assertEquals(gc.get(GregorianCalendar.MONTH), GregorianCalendar.JUNE);
+            assertEquals(gc.get(GregorianCalendar.DAY_OF_MONTH), 18);
+            assertEquals(gc.get(GregorianCalendar.HOUR_OF_DAY), 18);
+            assertEquals(gc.get(GregorianCalendar.MINUTE), 36);
+            assertEquals(gc.get(GregorianCalendar.SECOND), 1);
+
+
+        } catch (JCocException e) {
+            fail();
+        }
+    }
+
+    /**
+     * Test the worlog api
+     */
+    @Test
+    public void testWarLog() {
+
+        try {
+            assertNotNull(this.jcoc);
+            String clanTag = "#VLL2CUVJ"; //Clan exists
+            Search<War> search = this.jcoc.warLog(clanTag, 50, null, null);
+            assertNotNull(search);
+            assertNotEquals(search.getItems().size(), 0);
+
+            List<War> noPagingSearchList = search.getItems();
+            List<War> pagingList = new ArrayList<War>(); // a temp list to check the paging results are equals to
+                                                        // the one shot search
+            // 10 elements per page
+            int numberOfPage = (noPagingSearchList.size() / 10);
+            if (noPagingSearchList.size() % 10 != 0) {
+                numberOfPage += 1;
+            }
+
+            int currentPage = 0;
+            while (currentPage < numberOfPage) {
+
+                // First search
+                if (currentPage == 0) {
+                    search = this.jcoc.warLog(clanTag, 10, null, null);
+                } else {
+                    search = this.jcoc.warLog(clanTag, 10, null, search.getPaging().getCursors().getAfter());
+                }
+
+                assertNotNull(search);
+                assertTrue(search.getItems().size() <= 10);
+                pagingList.addAll(search.getItems());
+                currentPage++;
+            }
+
+            assertTrue(noPagingSearchList.containsAll(pagingList)); // Check if the two lists are equal
+
+            for(War w : noPagingSearchList) {
+                assertEquals(w.getClan().getTag(), "#VLL2CUVJ"); //Check if the data is retrieved correctly
+            }
+
+        } catch (JCocException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
 
     }
 
