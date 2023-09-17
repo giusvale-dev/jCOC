@@ -19,4 +19,9 @@ jcoc.clanWar();
 
 # How to test
 Before to test is needed to add your credentials in the application.properties file.
-By default this file is ignored from GIT (added in the .gitignore) then you can run the tests in your ide or with mvn command.
+Create the application.properties file in <h4>src/main/resources</h4> then insert the following values:
+```
+username=yourClashOfClansDeveloperEmail
+password=yourClashOfClansDeveloperPassword
+```
+By default this file is ignored from GIT

@@ -20,6 +20,8 @@ import javax.validation.constraints.NotNull;
 
 import org.jclash.coc.ClanService;
 import org.jclash.domain.Clan;
+import org.jclash.domain.Member;
+import org.jclash.domain.Search;
 import org.jclash.exceptions.JCocException;
 import org.jclash.security.Account;
 import org.jclash.security.AuthenticationService;
@@ -84,6 +86,28 @@ public class JCoc {
            throw new JCocException(e);
         }
     }
+
+    /**
+     * Search the clan members releated to the clanTag
+     * 
+     * @param clanTag the tag of the clan
+     * @param limit if you want limit the search (paging search)
+     * @param before if this field appears in the previous search, you can go back in paging search setting this value as parameter query (Prev)
+     * @param after if this field appears in the previous search, you can go next in paging search setting this value as parameter query (Next)
+     * @return The Search object with the list of items found and the curors for the next results or previous results
+     * @throws JCocException if an error occurs
+     */
+    public Search<Member> listClanMembers(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
+        try {
+            ClanService cs = new ClanService(this.apiToken);
+            Search<Member> clanMembers = cs.listClanMember(clanTag, limit, after, before);
+            return clanMembers;
+
+        } catch (Exception e) {
+           throw new JCocException(e);
+        }
+    }
+
 
     /**
      * Private method to get an API Token from COC Server.

@@ -51,7 +51,7 @@ public class Utils {
         try {
             response = httpClient.execute(httpGet);
         } catch (ClientProtocolException e) {
-            throw new JCocException("An HTTP error occours: " + e.getMessage());
+            throw new JCocException("An HTTP error occurs: " + e.getMessage());
         } catch (IOException e) {
             throw new JCocException("Connection error: " + e.getMessage());
         }

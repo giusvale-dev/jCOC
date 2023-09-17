@@ -25,6 +25,8 @@ public class PlayerHouse {
 
     }
 
+  
+
     /**
      * @return the elements
      */
@@ -40,6 +42,29 @@ public class PlayerHouse {
     }
 
     
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((elements == null) ? 0 : elements.hashCode());
+        return result;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PlayerHouse other = (PlayerHouse) obj;
+        if (elements == null) {
+            if (other.elements != null)
+                return false;
+        } else if (!elements.equals(other.elements))
+            return false;
+        return true;
+    }
 
 }

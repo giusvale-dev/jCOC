@@ -83,7 +83,46 @@ public class BadgeUrl {
         this.medium = medium;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((small == null) ? 0 : small.hashCode());
+        result = prime * result + ((large == null) ? 0 : large.hashCode());
+        result = prime * result + ((medium == null) ? 0 : medium.hashCode());
+        result = prime * result + ((tiny == null) ? 0 : tiny.hashCode());
+        return result;
+    }
 
-    
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BadgeUrl other = (BadgeUrl) obj;
+        if (small == null) {
+            if (other.small != null)
+                return false;
+        } else if (!small.equals(other.small))
+            return false;
+        if (large == null) {
+            if (other.large != null)
+                return false;
+        } else if (!large.equals(other.large))
+            return false;
+        if (medium == null) {
+            if (other.medium != null)
+                return false;
+        } else if (!medium.equals(other.medium))
+            return false;
+        if (tiny == null) {
+            if (other.tiny != null)
+                return false;
+        } else if (!tiny.equals(other.tiny))
+            return false;
+        return true;
+    }
 }

@@ -1,0 +1,61 @@
+/*
+ * Copyright 2023 Giuseppe Valente<valentepeppe@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.jclash.domain;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Search<T> {
+    
+    private Paging paging;
+    private List<T> items;
+
+    public Search() {
+
+    }
+
+    /**
+     * @return the paging
+     */
+    public Paging getPaging() {
+        return paging;
+    }
+
+    /**
+     * @param paging the paging to set
+     */
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
+    /**
+     * @return the items
+     */
+    public List<T> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(List<T> items) {
+        this.items = items;
+    }
+
+
+}

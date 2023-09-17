@@ -15,6 +15,9 @@
  */
 package org.jclash.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Member {
 
     private String tag;
@@ -229,5 +232,85 @@ public class Member {
      */
     public void setBuilderBaseLeague(League builderBaseLeague) {
         this.builderBaseLeague = builderBaseLeague;
-    }    
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((tag == null) ? 0 : tag.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((role == null) ? 0 : role.hashCode());
+        result = prime * result + expLevel;
+        result = prime * result + ((league == null) ? 0 : league.hashCode());
+        result = prime * result + trophies;
+        result = prime * result + builderBaseTrophies;
+        result = prime * result + versusTrophies;
+        result = prime * result + clanRank;
+        result = prime * result + previousClanRank;
+        result = prime * result + donations;
+        result = prime * result + donationsReceived;
+        result = prime * result + ((playerHouse == null) ? 0 : playerHouse.hashCode());
+        result = prime * result + ((builderBaseLeague == null) ? 0 : builderBaseLeague.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Member other = (Member) obj;
+        if (tag == null) {
+            if (other.tag != null)
+                return false;
+        } else if (!tag.equals(other.tag))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (role == null) {
+            if (other.role != null)
+                return false;
+        } else if (!role.equals(other.role))
+            return false;
+        if (expLevel != other.expLevel)
+            return false;
+        if (league == null) {
+            if (other.league != null)
+                return false;
+        } else if (!league.equals(other.league))
+            return false;
+        if (trophies != other.trophies)
+            return false;
+        if (builderBaseTrophies != other.builderBaseTrophies)
+            return false;
+        if (versusTrophies != other.versusTrophies)
+            return false;
+        if (clanRank != other.clanRank)
+            return false;
+        if (previousClanRank != other.previousClanRank)
+            return false;
+        if (donations != other.donations)
+            return false;
+        if (donationsReceived != other.donationsReceived)
+            return false;
+        if (playerHouse == null) {
+            if (other.playerHouse != null)
+                return false;
+        } else if (!playerHouse.equals(other.playerHouse))
+            return false;
+        if (builderBaseLeague == null) {
+            if (other.builderBaseLeague != null)
+                return false;
+        } else if (!builderBaseLeague.equals(other.builderBaseLeague))
+            return false;
+        return true;
+    }
+  
 }
