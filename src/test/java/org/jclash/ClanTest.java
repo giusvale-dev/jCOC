@@ -32,10 +32,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
+import org.jclash.domain.Attack;
 import org.jclash.domain.ClanInfo;
 import org.jclash.domain.ClanType;
+import org.jclash.domain.CurrentWar;
+import org.jclash.domain.CurrentWarMember;
 import org.jclash.domain.Element;
-import org.jclash.domain.Member;
+import org.jclash.domain.ClanInfoMember;
 import org.jclash.domain.PlayerHouse;
 import org.jclash.domain.Search;
 import org.jclash.domain.OldWar;
@@ -66,10 +69,12 @@ public class ClanTest {
         Properties properties = new Properties();
         properties.load(inputStream);
 
-        String username = properties.getProperty("username");
-        String password = properties.getProperty("password");
+       // String username = properties.getProperty("username");
+       // String password = properties.getProperty("password");
+       String apiToken = properties.getProperty("token");
 
-        jcoc = new JCoc(username, password);
+       // jcoc = new JCoc(username, password);
+       jcoc = new JCoc(apiToken);
 
     }
 
@@ -129,7 +134,7 @@ public class ClanTest {
         assertEquals("Master League III", c.getWarLeague().getName());
         assertEquals(32, c.getMembers());
         assertEquals(32, c.getMemberList().size());
-        Member m = c.getMemberList().get(0);
+        ClanInfoMember m = c.getMemberList().get(0);
         assertEquals("#9JUUURU8Y", m.getTag());
         assertEquals("Cri", m.getName());
         assertEquals("coLeader", m.getRole());
@@ -187,12 +192,12 @@ public class ClanTest {
         try {
             assertNotNull(this.jcoc);
             String clanTag = "#VLL2CUVJ";
-            Search<Member> search = this.jcoc.clanMembers(clanTag, 50, null, null);
+            Search<ClanInfoMember> search = this.jcoc.clanMembers(clanTag, 50, null, null);
             assertNotNull(search);
             assertNotEquals(search.getItems().size(), 0);
 
-            List<Member> noPagingSearchList = search.getItems();
-            List<Member> pagingList = new ArrayList<Member>(); // a temp list to check the paging results are equals to
+            List<ClanInfoMember> noPagingSearchList = search.getItems();
+            List<ClanInfoMember> pagingList = new ArrayList<ClanInfoMember>(); // a temp list to check the paging results are equals to
                                                                // the one shot search
 
             // 10 elements per page
@@ -310,6 +315,36 @@ public class ClanTest {
             Assert.fail();
         }
 
+    }
+    
+
+    /**
+     * Test the current war deserialization (offline test)
+     * @throws Exception
+     */
+    @Test
+    public void testCurrentWarDeserialized() {
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("currentwar.json");
+        CurrentWar cw = null;
+        try {
+            cw = mapper.readValue(inputStream, CurrentWar.class);
+        } catch(Exception e) {
+            Assert.fail();
+        }
+        assertNotNull(cw);
+        assertEquals(cw.getState(), "inWar");
+        assertEquals(cw.getTeamSize(), 15);
+        assertEquals(cw.getPreparationStartTime(), "20230917T193135.000Z");
+        assertEquals(cw.getClan().getAttacks(), 10);
+
+        for(CurrentWarMember cwm : cw.getClan().getMembers()) {
+            if(cwm.getTag().equals("#8CJ922CPC")) {
+                for(Attack a : cwm.getAttacks()) {
+                    assertTrue(a.getStars() == 2 || a.getStars() == 3);
+                }
+            }
+        }
     }
 
 }

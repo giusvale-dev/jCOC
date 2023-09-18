@@ -20,7 +20,8 @@ import javax.validation.constraints.NotNull;
 
 import org.jclash.coc.ClanService;
 import org.jclash.domain.ClanInfo;
-import org.jclash.domain.Member;
+import org.jclash.domain.ClanInfoMember;
+import org.jclash.domain.CurrentWar;
 import org.jclash.domain.Search;
 import org.jclash.domain.OldWar;
 import org.jclash.exceptions.JCocException;
@@ -106,10 +107,10 @@ public class JCoc {
      * @return The clan members
      * @throws JCocException if an error occurs
      */
-    public Search<Member> clanMembers(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
+    public Search<ClanInfoMember> clanMembers(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
         try {
             ClanService cs = new ClanService(this.apiToken);
-            Search<Member> clanMembers = cs.clanMembers(clanTag, limit, after, before);
+            Search<ClanInfoMember> clanMembers = cs.clanMembers(clanTag, limit, after, before);
             return clanMembers;
 
         } catch (Exception e) {
@@ -141,6 +142,22 @@ public class JCoc {
         }
     }
 
+    /**
+     * Retrieve information about clan's current clan war
+     * 
+     * @param clanTag Tag of the clan.
+     * @return the current war
+     * @throws JCocException if an error occurs
+     */
+    public CurrentWar currentWar(@NotNull String clanTag) throws JCocException {
+        try {
+            ClanService cs = new ClanService(this.apiToken);
+            CurrentWar currentWar = cs.currentWar(clanTag);
+            return currentWar;
+        } catch (Exception e) {
+           throw new JCocException(e);
+        }
+    }
 
     /**
      * Private method to get an API Token from COC Server.

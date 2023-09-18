@@ -31,7 +31,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.jclash.domain.ClanInfo;
-import org.jclash.domain.Member;
+import org.jclash.domain.ClanInfoMember;
+import org.jclash.domain.CurrentWar;
 import org.jclash.domain.Search;
 import org.jclash.domain.OldWar;
 import org.jclash.exceptions.JCocException;
@@ -101,7 +102,7 @@ public class ClanService {
      * @return The clan members
      * @throws JCocException if an error occurs
      */
-    public Search<Member> clanMembers(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
+    public Search<ClanInfoMember> clanMembers(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
 
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
@@ -135,8 +136,8 @@ public class ClanService {
             InputStream is = entity.getContent();
 
             ObjectMapper mapper = new ObjectMapper();
-            JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, Member.class);
-            Search<Member> resultSearch = mapper.readValue(is, type);
+            JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, ClanInfoMember.class);
+            Search<ClanInfoMember> resultSearch = mapper.readValue(is, type);
             return resultSearch;
 
         } catch(Exception e) {
@@ -194,6 +195,42 @@ public class ClanService {
             ObjectMapper mapper = new ObjectMapper();
             JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, OldWar.class);
             Search<OldWar> resultSearch = mapper.readValue(is, type);
+            return resultSearch;
+
+        } catch(Exception e) {
+            throw new JCocException(e);
+        }
+    }
+
+    /**
+     * Retrieve information about clan's current clan war
+     * 
+     * @param clanTag Tag of the clan.
+     * @return the current war
+     * @throws JCocException if an error occurs
+     */
+    public CurrentWar currentWar(@NotNull String clanTag) throws JCocException {
+
+        try {
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            
+            HttpGet httpGet = new HttpGet(BASE_CLAN_URI + 
+                                          URLEncoder.encode(clanTag, StandardCharsets.UTF_8.toString())
+                                          + "/currentwar");
+            
+            httpGet.setHeader("Authorization", "Bearer " + API_TOKEN);
+        
+            HttpResponse response = httpClient.execute(httpGet);
+            int httpResponseCode = response.getStatusLine().getStatusCode();
+            if(httpResponseCode != HttpStatus.SC_OK) {
+               throw new JCocException("Error during warLog method, COC responds with HTTP code " + response.getStatusLine().getStatusCode());
+            }
+
+            HttpEntity entity = response.getEntity();
+            InputStream is = entity.getContent();
+
+            ObjectMapper mapper = new ObjectMapper();
+            CurrentWar resultSearch = mapper.readValue(is, CurrentWar.class);
             return resultSearch;
 
         } catch(Exception e) {

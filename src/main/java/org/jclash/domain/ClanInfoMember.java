@@ -18,10 +18,8 @@ package org.jclash.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Member {
+public class ClanInfoMember extends GenericMember{
 
-    private String tag;
-    private String name;
     private String role;
     private int expLevel;
     private League league;
@@ -35,35 +33,7 @@ public class Member {
     private PlayerHouse playerHouse;
     private League builderBaseLeague;
 
-    public Member() {
-    }
-
-    /**
-     * @return the tag
-     */
-    public String getTag() {
-        return tag;
-    }
-
-    /**
-     * @param tag the tag to set
-     */
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
+    public ClanInfoMember() {
     }
 
     /**
@@ -237,9 +207,7 @@ public class Member {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
-        result = prime * result + ((tag == null) ? 0 : tag.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        int result = super.hashCode();
         result = prime * result + ((role == null) ? 0 : role.hashCode());
         result = prime * result + expLevel;
         result = prime * result + ((league == null) ? 0 : league.hashCode());
@@ -259,21 +227,11 @@ public class Member {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
+        if (!super.equals(obj))
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Member other = (Member) obj;
-        if (tag == null) {
-            if (other.tag != null)
-                return false;
-        } else if (!tag.equals(other.tag))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
+        ClanInfoMember other = (ClanInfoMember) obj;
         if (role == null) {
             if (other.role != null)
                 return false;

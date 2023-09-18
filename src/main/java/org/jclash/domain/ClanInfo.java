@@ -85,19 +85,19 @@ public class ClanInfo extends GenericClan{
     private int members;
 
     @JsonProperty
-    private List<Member> memberList;
+    private List<ClanInfoMember> memberList;
 
     /**
      * @return the memberList
      */
-    public List<Member> getMemberList() {
+    public List<ClanInfoMember> getMemberList() {
         return memberList;
     }
 
     /**
      * @param memberList the memberList to set
      */
-    public void setMemberList(List<Member> memberList) {
+    public void setMemberList(List<ClanInfoMember> memberList) {
         this.memberList = memberList;
     }
 
