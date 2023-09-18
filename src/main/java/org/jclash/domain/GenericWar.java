@@ -19,10 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class War {
- 
-    @JsonProperty
-    private String result;
+public abstract class GenericWar<T extends GenericClan> {
     
     @JsonProperty
     private String endTime;
@@ -32,33 +29,16 @@ public class War {
     
     @JsonProperty
     private int attacksPerMember;
+
+    @JsonProperty
+    private T clan;
     
     @JsonProperty
-    private Clan clan;
-    
-    @JsonProperty
-    private Clan opponent;
+    private T opponent;
 
-    public War() {
+    public GenericWar() {
 
     }
-
-
-    /**
-     * @return the result
-     */
-    public String getResult() {
-        return result;
-    }
-
-
-    /**
-     * @param result the result to set
-     */
-    public void setResult(String result) {
-        this.result = result;
-    }
-
 
     /**
      * @return the endTime
@@ -67,14 +47,12 @@ public class War {
         return endTime;
     }
 
-
     /**
      * @param endTime the endTime to set
      */
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-
 
     /**
      * @return the teamSize
@@ -83,14 +61,12 @@ public class War {
         return teamSize;
     }
 
-
     /**
      * @param teamSize the teamSize to set
      */
     public void setTeamSize(int teamSize) {
         this.teamSize = teamSize;
     }
-
 
     /**
      * @return the attacksPerMember
@@ -99,7 +75,6 @@ public class War {
         return attacksPerMember;
     }
 
-
     /**
      * @param attacksPerMember the attacksPerMember to set
      */
@@ -107,44 +82,38 @@ public class War {
         this.attacksPerMember = attacksPerMember;
     }
 
-
     /**
      * @return the clan
      */
-    public Clan getClan() {
+    public T getClan() {
         return clan;
     }
-
 
     /**
      * @param clan the clan to set
      */
-    public void setClan(Clan clan) {
+    public void setClan(T clan) {
         this.clan = clan;
     }
-
 
     /**
      * @return the opponent
      */
-    public Clan getOpponent() {
+    public T getOpponent() {
         return opponent;
     }
-
 
     /**
      * @param opponent the opponent to set
      */
-    public void setOpponent(Clan opponent) {
+    public void setOpponent(T opponent) {
         this.opponent = opponent;
     }
-
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.result == null) ? 0 : this.result.hashCode());
         result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
         result = prime * result + teamSize;
         result = prime * result + attacksPerMember;
@@ -161,12 +130,7 @@ public class War {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        War other = (War) obj;
-        if (result == null) {
-            if (other.result != null)
-                return false;
-        } else if (!result.equals(other.result))
-            return false;
+        GenericWar other = (GenericWar) obj;
         if (endTime == null) {
             if (other.endTime != null)
                 return false;

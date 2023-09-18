@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclash.domain;
 
 import java.util.List;
@@ -23,31 +22,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Clan {
+public class ClanInfo extends GenericClan{
     
-    public Clan() {
+    public ClanInfo() {
     }
-
-    /** Fields used in clan war **/
-    @JsonProperty
-    private int attacks;
-
-    @JsonProperty
-    private int starts;
-
-    @JsonProperty
-    private double destructionPercentage;
-
-    @JsonProperty
-    private int expEarned;
-
-    /** End fields used in clan war **/
-
-    @JsonProperty
-    private String tag;
-
-    @JsonProperty
-    private String name;
 
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     private ClanType type;
@@ -60,12 +38,6 @@ public class Clan {
 
     @JsonProperty
     private boolean isFamilyFriendly;
-
-    @JsonProperty
-    private BadgeUrl badgeUrls;
-
-    @JsonProperty
-    private int clanLevel;
 
     @JsonProperty
     private int clanPoints;
@@ -116,13 +88,6 @@ public class Clan {
     private List<Member> memberList;
 
     /**
-     * @return the tag
-     */
-    public String getTag() {
-        return tag;
-    }
-
-    /**
      * @return the memberList
      */
     public List<Member> getMemberList() {
@@ -134,27 +99,6 @@ public class Clan {
      */
     public void setMemberList(List<Member> memberList) {
         this.memberList = memberList;
-    }
-
-    /**
-     * @param tag the tag to set
-     */
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -211,34 +155,6 @@ public class Clan {
      */
     public void setFamilyFriendly(boolean isFamilyFriendly) {
         this.isFamilyFriendly = isFamilyFriendly;
-    }
-
-    /**
-     * @return the badgeUrls
-     */
-    public BadgeUrl getBadgeUrls() {
-        return badgeUrls;
-    }
-
-    /**
-     * @param badgeUrls the badgeUrls to set
-     */
-    public void setBadgeUrls(BadgeUrl badgeUrls) {
-        this.badgeUrls = badgeUrls;
-    }
-
-    /**
-     * @return the clanLevel
-     */
-    public int getClanLevel() {
-        return clanLevel;
-    }
-
-    /**
-     * @param clanLevel the clanLevel to set
-     */
-    public void setClanLevel(int clanLevel) {
-        this.clanLevel = clanLevel;
     }
 
     /**
@@ -451,80 +367,14 @@ public class Clan {
         this.members = members;
     }
 
-    /**
-     * @return the attacks
-     */
-    public int getAttacks() {
-        return attacks;
-    }
-
-    /**
-     * @param attacks the attacks to set
-     */
-    public void setAttacks(int attacks) {
-        this.attacks = attacks;
-    }
-
-    /**
-     * @return the starts
-     */
-    public int getStarts() {
-        return starts;
-    }
-
-    /**
-     * @param starts the starts to set
-     */
-    public void setStarts(int starts) {
-        this.starts = starts;
-    }
-
-    /**
-     * @return the destructionPercentage
-     */
-    public double getDestructionPercentage() {
-        return destructionPercentage;
-    }
-
-    /**
-     * @param destructionPercentage the destructionPercentage to set
-     */
-    public void setDestructionPercentage(double destructionPercentage) {
-        this.destructionPercentage = destructionPercentage;
-    }
-
-    /**
-     * @return the expEarned
-     */
-    public int getExpEarned() {
-        return expEarned;
-    }
-
-    /**
-     * @param expEarned the expEarned to set
-     */
-    public void setExpEarned(int expEarned) {
-        this.expEarned = expEarned;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
-        result = prime * result + attacks;
-        result = prime * result + starts;
-        long temp;
-        temp = Double.doubleToLongBits(destructionPercentage);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + expEarned;
-        result = prime * result + ((tag == null) ? 0 : tag.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        int result = super.hashCode();
         result = prime * result + ((type == null) ? 0 : type.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((location == null) ? 0 : location.hashCode());
         result = prime * result + (isFamilyFriendly ? 1231 : 1237);
-        result = prime * result + ((badgeUrls == null) ? 0 : badgeUrls.hashCode());
-        result = prime * result + clanLevel;
         result = prime * result + clanPoints;
         result = prime * result + clanBuilderBasePoints;
         result = prime * result + clanVersusPoints;
@@ -548,29 +398,11 @@ public class Clan {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
+        if (!super.equals(obj))
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Clan other = (Clan) obj;
-        if (attacks != other.attacks)
-            return false;
-        if (starts != other.starts)
-            return false;
-        if (Double.doubleToLongBits(destructionPercentage) != Double.doubleToLongBits(other.destructionPercentage))
-            return false;
-        if (expEarned != other.expEarned)
-            return false;
-        if (tag == null) {
-            if (other.tag != null)
-                return false;
-        } else if (!tag.equals(other.tag))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
+        ClanInfo other = (ClanInfo) obj;
         if (type != other.type)
             return false;
         if (description == null) {
@@ -584,13 +416,6 @@ public class Clan {
         } else if (!location.equals(other.location))
             return false;
         if (isFamilyFriendly != other.isFamilyFriendly)
-            return false;
-        if (badgeUrls == null) {
-            if (other.badgeUrls != null)
-                return false;
-        } else if (!badgeUrls.equals(other.badgeUrls))
-            return false;
-        if (clanLevel != other.clanLevel)
             return false;
         if (clanPoints != other.clanPoints)
             return false;

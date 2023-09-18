@@ -32,13 +32,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
-import org.jclash.domain.Clan;
+import org.jclash.domain.ClanInfo;
 import org.jclash.domain.ClanType;
 import org.jclash.domain.Element;
 import org.jclash.domain.Member;
 import org.jclash.domain.PlayerHouse;
 import org.jclash.domain.Search;
-import org.jclash.domain.War;
+import org.jclash.domain.OldWar;
 import org.jclash.exceptions.JCocException;
 import org.jclash.utils.Utils;
 import org.junit.Assert;
@@ -81,7 +81,7 @@ public class ClanTest {
 
         ObjectMapper mapper = new ObjectMapper();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("clan.json");
-        Clan c = mapper.readValue(inputStream, Clan.class);
+        ClanInfo c = mapper.readValue(inputStream, ClanInfo.class);
         assertNotNull(c);
     }
 
@@ -97,7 +97,7 @@ public class ClanTest {
 
         ObjectMapper mapper = new ObjectMapper();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("clan.json");
-        Clan c = mapper.readValue(inputStream, Clan.class);
+        ClanInfo c = mapper.readValue(inputStream, ClanInfo.class);
         assertNotNull(c);
         assertEquals("#VLL2CUVJ", c.getTag());
         assertEquals("Davros", c.getName());
@@ -167,7 +167,7 @@ public class ClanTest {
         try {
             assertNotNull(this.jcoc);
             String clanTag = "#VLL2CUVJ"; // This tag refers to an existing clan and the tag is immutable
-            Clan clan = this.jcoc.clanInfo(clanTag);
+            ClanInfo clan = this.jcoc.clanInfo(clanTag);
             assertNotNull(clan);
             assertEquals(clan.getTag(), clanTag);
         } catch (JCocException e) {
@@ -270,12 +270,12 @@ public class ClanTest {
         try {
             assertNotNull(this.jcoc);
             String clanTag = "#VLL2CUVJ"; //Clan exists
-            Search<War> search = this.jcoc.warLog(clanTag, 50, null, null);
+            Search<OldWar> search = this.jcoc.warLog(clanTag, 50, null, null);
             assertNotNull(search);
             assertNotEquals(search.getItems().size(), 0);
 
-            List<War> noPagingSearchList = search.getItems();
-            List<War> pagingList = new ArrayList<War>(); // a temp list to check the paging results are equals to
+            List<OldWar> noPagingSearchList = search.getItems();
+            List<OldWar> pagingList = new ArrayList<OldWar>(); // a temp list to check the paging results are equals to
                                                         // the one shot search
             // 10 elements per page
             int numberOfPage = (noPagingSearchList.size() / 10);
@@ -301,7 +301,7 @@ public class ClanTest {
 
             assertTrue(noPagingSearchList.containsAll(pagingList)); // Check if the two lists are equal
 
-            for(War w : noPagingSearchList) {
+            for(OldWar w : noPagingSearchList) {
                 assertEquals(w.getClan().getTag(), "#VLL2CUVJ"); //Check if the data is retrieved correctly
             }
 

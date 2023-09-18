@@ -19,10 +19,10 @@ package org.jclash;
 import javax.validation.constraints.NotNull;
 
 import org.jclash.coc.ClanService;
-import org.jclash.domain.Clan;
+import org.jclash.domain.ClanInfo;
 import org.jclash.domain.Member;
 import org.jclash.domain.Search;
-import org.jclash.domain.War;
+import org.jclash.domain.OldWar;
 import org.jclash.exceptions.JCocException;
 import org.jclash.security.Account;
 import org.jclash.security.AuthenticationService;
@@ -81,10 +81,10 @@ public class JCoc {
      * @return The clan informations
      * @throws JCocException if an error occurs
      */
-    public Clan clanInfo(@NotNull String clanTag) throws JCocException {
+    public ClanInfo clanInfo(@NotNull String clanTag) throws JCocException {
         try {
             ClanService cs = new ClanService(this.apiToken);
-            Clan clan = cs.clanInfo(clanTag);
+            ClanInfo clan = cs.clanInfo(clanTag);
             return clan;
 
         } catch (Exception e) {
@@ -131,10 +131,10 @@ public class JCoc {
      * @return the war log of the clan related to the clanTag
      * @throws JCocException if an error occurs
      */
-    public Search<War> warLog(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
+    public Search<OldWar> warLog(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
         try {
             ClanService cs = new ClanService(this.apiToken);
-            Search<War> warLog = cs.warLog(clanTag, limit, after, before);
+            Search<OldWar> warLog = cs.warLog(clanTag, limit, after, before);
             return warLog;
         } catch (Exception e) {
            throw new JCocException(e);

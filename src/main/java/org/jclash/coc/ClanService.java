@@ -30,10 +30,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.jclash.domain.Clan;
+import org.jclash.domain.ClanInfo;
 import org.jclash.domain.Member;
 import org.jclash.domain.Search;
-import org.jclash.domain.War;
+import org.jclash.domain.OldWar;
 import org.jclash.exceptions.JCocException;
 
 import com.fasterxml.jackson.databind.JavaType;
@@ -61,7 +61,7 @@ public class ClanService {
      * @return The clan informations
      * @throws JCocException if an error occurs
      */
-    public Clan clanInfo(String clanTag) throws JCocException {
+    public ClanInfo clanInfo(String clanTag) throws JCocException {
         
         try {
 
@@ -80,7 +80,7 @@ public class ClanService {
             InputStream is = entity.getContent();
 
             ObjectMapper mapper = new ObjectMapper();
-            Clan result = mapper.readValue(is, Clan.class);
+            ClanInfo result = mapper.readValue(is, ClanInfo.class);
             return result;
         } catch(Exception e) {
             throw new JCocException(e);
@@ -158,7 +158,7 @@ public class ClanService {
      * @return the war log of the clan related to the clanTag
      * @throws JCocException if an error occurs
      */
-    public Search<War> warLog(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
+    public Search<OldWar> warLog(@NotNull String clanTag,  @Min(0) @Max(50) int limit, String after, String before) throws JCocException {
 
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
@@ -192,8 +192,8 @@ public class ClanService {
             InputStream is = entity.getContent();
 
             ObjectMapper mapper = new ObjectMapper();
-            JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, War.class);
-            Search<War> resultSearch = mapper.readValue(is, type);
+            JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, OldWar.class);
+            Search<OldWar> resultSearch = mapper.readValue(is, type);
             return resultSearch;
 
         } catch(Exception e) {
