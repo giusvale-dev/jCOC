@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum WarFrequency {
     
-    UNKNOWN                     ("unknow"), 
+    UNKNOWN                     ("unknown"), 
     ALWAYS                      ("always"), 
     MORE_THAN_ONCE_PER_WEEK     ("moreThanOncePerWeek"), 
     ONCE_PER_WEEK               ("oncePerWeek"),  

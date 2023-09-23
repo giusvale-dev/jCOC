@@ -22,6 +22,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -39,6 +41,7 @@ import org.jclash.domain.CurrentWar;
 import org.jclash.domain.CurrentWarMember;
 import org.jclash.domain.Element;
 import org.jclash.domain.ClanInfoMember;
+import org.jclash.domain.ClanSearch;
 import org.jclash.domain.PlayerHouse;
 import org.jclash.domain.Search;
 import org.jclash.domain.OldWar;
@@ -50,6 +53,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ClanTest {
@@ -69,11 +73,11 @@ public class ClanTest {
         Properties properties = new Properties();
         properties.load(inputStream);
 
-       // String username = properties.getProperty("username");
-       // String password = properties.getProperty("password");
+        // String username = properties.getProperty("username");
+        // String password = properties.getProperty("password");
        String apiToken = properties.getProperty("token");
 
-       // jcoc = new JCoc(username, password);
+        // jcoc = new JCoc(username, password);
        jcoc = new JCoc(apiToken);
 
     }
@@ -281,7 +285,7 @@ public class ClanTest {
 
             List<OldWar> noPagingSearchList = search.getItems();
             List<OldWar> pagingList = new ArrayList<OldWar>(); // a temp list to check the paging results are equals to
-                                                        // the one shot search
+            // the one shot search
             // 10 elements per page
             int numberOfPage = (noPagingSearchList.size() / 10);
             if (noPagingSearchList.size() % 10 != 0) {
@@ -303,9 +307,7 @@ public class ClanTest {
                 pagingList.addAll(search.getItems());
                 currentPage++;
             }
-
             assertTrue(noPagingSearchList.containsAll(pagingList)); // Check if the two lists are equal
-
             for(OldWar w : noPagingSearchList) {
                 assertEquals(w.getClan().getTag(), "#VLL2CUVJ"); //Check if the data is retrieved correctly
             }
@@ -345,6 +347,46 @@ public class ClanTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void clanSearchDeserializeTest() throws StreamReadException, DatabindException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("clan-search.json");
+        JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, ClanSearch.class);
+        Search<ClanSearch> resultSearch = mapper.readValue(inputStream, type);
+        assertNotNull(resultSearch);
+        assertTrue(resultSearch.getItems().size() == 11);
+        assertNotNull(resultSearch);
+        for(ClanSearch cs : resultSearch.getItems()) {
+            assertNotNull(cs);
+            assertTrue(cs.getName().toUpperCase().contains("DAVROS"));
+        }
+    }
+
+    @Test
+    public void clanSearchAPITest() {
+        try {
+            //Test with a real clan
+            Search<ClanSearch> result = this.jcoc.searchClans(
+                                                              "Davros", null, 32000120, 
+                                                              null, null, null,
+                                                              null, null, null, 
+                                                              null, null
+                                                            );
+            Assert.assertNotNull(result);
+
+            for(ClanSearch cs : result.getItems()) {
+                assertTrue(cs.getName().equalsIgnoreCase("Davros") || cs.getName().equalsIgnoreCase("Davros junior"));
+            }
+
+
+        } catch (JCocException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+
     }
 
 }

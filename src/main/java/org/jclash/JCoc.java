@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import org.jclash.coc.ClanService;
 import org.jclash.domain.ClanInfo;
 import org.jclash.domain.ClanInfoMember;
+import org.jclash.domain.ClanSearch;
 import org.jclash.domain.CurrentWar;
 import org.jclash.domain.Search;
 import org.jclash.domain.OldWar;
@@ -202,5 +203,49 @@ public class JCoc {
         } catch (Exception e) {
             throw new JCocException(e.getMessage());
         }
+    }
+
+      /**
+     * Search all clans by name and/or filtering the results using various criteria. 
+     * At least one filtering criteria must be defined and if name is used as part of search, 
+     * it is required to be at least three characters long. It is not possible to specify 
+     * ordering for results so clients should not rely on any specific ordering as that may 
+     * change in the future releases of the API.
+     * 
+     * @param name Search clans by name. 
+     *             If name is used as part of search query, it needs to be at least three characters long. 
+     *             Name search parameter is interpreted as wild card search, so it may appear anywhere in the clan name.
+     * @param warFrequency Filter by clan war frequency
+     * @param locationId Filter by clan location identifier. For list of available locations, refer to getLocations operation.
+     * @param minMembers Filter by minimum number of clan members
+     * @param maxMembers Filter by maximum number of clan members
+     * @param minClanPoints Filter by minimum amount of clan points.
+     * @param minClanLevel Filter by minimum clan level.
+     * @param limit Limit the number of items returned in the response.
+     * @param after Return only items that occur after this marker. Before marker can be found from the response, 
+     *              inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+     * @param before Return only items that occur before this marker. Before marker can be found from the response, 
+     *               inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+     * @param labelIds Comma separatered list of label IDs to use for filtering results.
+     * @return
+     * @throws JCocException
+     */
+    public Search<ClanSearch> searchClans(
+                                          String name, String warFrequency, Integer locationId, 
+                                          Integer minMembers, Integer maxMembers, Integer minClanPoints, 
+                                          Integer minClanLevel, Integer limit, String after, 
+                                          String before, String labelIds
+                                        ) throws JCocException {
+        try {
+            ClanService cs = new ClanService(this.apiToken);
+           return cs.searchClans(
+                                 name, warFrequency, locationId, minMembers, 
+                                 maxMembers, minClanPoints, minClanLevel, 
+                                 limit, after, before, labelIds
+                                );    
+        } catch(Exception e) {
+            throw new JCocException(e);
+        }
+        
     }
 }
