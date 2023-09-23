@@ -1,0 +1,566 @@
+{
+  "items": [
+    {
+      "tag": "#VLL2CUVJ",
+      "name": "Davros",
+      "type": "open",
+      "location": {
+        "id": 32000120,
+        "name": "Italy",
+        "isCountry": true,
+        "countryCode": "IT"
+      },
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/MlbtYAjQaBfVbegKSWn5GJ_lCgIcaoaqsAPwUWm8iig.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/MlbtYAjQaBfVbegKSWn5GJ_lCgIcaoaqsAPwUWm8iig.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/MlbtYAjQaBfVbegKSWn5GJ_lCgIcaoaqsAPwUWm8iig.png"
+      },
+      "clanLevel": 19,
+      "clanPoints": 38427,
+      "clanBuilderBasePoints": 33731,
+      "clanVersusPoints": 33731,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 2300,
+      "warFrequency": "moreThanOncePerWeek",
+      "warWinStreak": 2,
+      "warWins": 234,
+      "warTies": 4,
+      "warLosses": 65,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000013,
+        "name": "Master League III"
+      },
+      "members": 50,
+      "labels": [
+        {
+          "id": 56000000,
+          "name": "Clan Wars",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png"
+          }
+        },
+        {
+          "id": 56000001,
+          "name": "Clan War League",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png"
+          }
+        },
+        {
+          "id": 56000004,
+          "name": "Clan Games",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/7qU7tQGERiVITVG0CPFov1-BnFldu4bMN2gXML5bLIU.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/7qU7tQGERiVITVG0CPFov1-BnFldu4bMN2gXML5bLIU.png"
+          }
+        }
+      ],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 12
+    },
+    {
+      "tag": "#CQ00C9J8",
+      "name": "Davros",
+      "type": "open",
+      "location": {
+        "id": 32000248,
+        "name": "United Kingdom",
+        "isCountry": true,
+        "countryCode": "GB"
+      },
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/jqlMozrzpUTea9WiGFY4a6x4NTT7SrPcyV2eJE0yvf4.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/jqlMozrzpUTea9WiGFY4a6x4NTT7SrPcyV2eJE0yvf4.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/jqlMozrzpUTea9WiGFY4a6x4NTT7SrPcyV2eJE0yvf4.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 662,
+      "clanBuilderBasePoints": 389,
+      "clanVersusPoints": 389,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "oncePerWeek",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 3,
+      "labels": [],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    },
+    {
+      "tag": "#20JUGG8Q0",
+      "name": "Davros",
+      "type": "inviteOnly",
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/L2wCqJG-aD9uRJHbTUtvUJleUZ1SDdHK7Smfe8kluEg.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/L2wCqJG-aD9uRJHbTUtvUJleUZ1SDdHK7Smfe8kluEg.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/L2wCqJG-aD9uRJHbTUtvUJleUZ1SDdHK7Smfe8kluEg.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 1797,
+      "clanBuilderBasePoints": 2383,
+      "clanVersusPoints": 2383,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "unknown",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 2,
+      "labels": [],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    },
+    {
+      "tag": "#2G0J0CU",
+      "name": "dAVROS",
+      "type": "inviteOnly",
+      "location": {
+        "id": 32000006,
+        "name": "International",
+        "isCountry": false
+      },
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/-TTpztkA4-nBxrAXftlpA3Ygx-h4EdrdNIAu7bMNWFM.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/-TTpztkA4-nBxrAXftlpA3Ygx-h4EdrdNIAu7bMNWFM.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/-TTpztkA4-nBxrAXftlpA3Ygx-h4EdrdNIAu7bMNWFM.png"
+      },
+      "clanLevel": 2,
+      "clanPoints": 6554,
+      "clanBuilderBasePoints": 7990,
+      "clanVersusPoints": 7990,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "lessThanOncePerWeek",
+      "warWinStreak": 0,
+      "warWins": 3,
+      "warTies": 0,
+      "warLosses": 9,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 14,
+      "labels": [
+        {
+          "id": 56000008,
+          "name": "Farming",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/iLWz6AiaIHg_DqfG6s9vAxUJKb-RsPbSYl_S0ii9GAM.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/iLWz6AiaIHg_DqfG6s9vAxUJKb-RsPbSYl_S0ii9GAM.png"
+          }
+        },
+        {
+          "id": 56000009,
+          "name": "Donations",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/RauzS-02tv4vWm1edZ-q3gPQGWKGANLZ-85HCw_NVP0.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/RauzS-02tv4vWm1edZ-q3gPQGWKGANLZ-85HCw_NVP0.png"
+          }
+        },
+        {
+          "id": 56000013,
+          "name": "Relaxed",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/Kv1MZQfd5A7DLwf1Zw3tOaUiwQHGMwmRpjZqOalu_hI.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/Kv1MZQfd5A7DLwf1Zw3tOaUiwQHGMwmRpjZqOalu_hI.png"
+          }
+        }
+      ],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    },
+    {
+      "tag": "#20GQ0G0L2",
+      "name": "Davros",
+      "type": "open",
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/DcHcgP14dK0OPmf_G77JtangGL7_5u6oAOWUbbXP8Yw.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/DcHcgP14dK0OPmf_G77JtangGL7_5u6oAOWUbbXP8Yw.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/DcHcgP14dK0OPmf_G77JtangGL7_5u6oAOWUbbXP8Yw.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 865,
+      "clanBuilderBasePoints": 475,
+      "clanVersusPoints": 475,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "unknown",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 2,
+      "labels": [],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    },
+    {
+      "tag": "#2PJ0QR9CV",
+      "name": "Davros junior",
+      "type": "open",
+      "location": {
+        "id": 32000120,
+        "name": "Italy",
+        "isCountry": true,
+        "countryCode": "IT"
+      },
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/3slk6MSKV8yWZ9HOtREcivQ_0lmuyH65vB8btFK1D4o.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/3slk6MSKV8yWZ9HOtREcivQ_0lmuyH65vB8btFK1D4o.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/3slk6MSKV8yWZ9HOtREcivQ_0lmuyH65vB8btFK1D4o.png"
+      },
+      "clanLevel": 9,
+      "clanPoints": 726,
+      "clanBuilderBasePoints": 712,
+      "clanVersusPoints": 712,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "never",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000010,
+        "name": "Crystal League III"
+      },
+      "members": 2,
+      "labels": [
+        {
+          "id": 56000001,
+          "name": "Clan War League",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png"
+          }
+        },
+        {
+          "id": 56000010,
+          "name": "Friendly",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/hM7SHnN0x7syFa-s6fE7LzeO5yWG2sfFpZUHuzgMwQg.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/hM7SHnN0x7syFa-s6fE7LzeO5yWG2sfFpZUHuzgMwQg.png"
+          }
+        },
+        {
+          "id": 56000013,
+          "name": "Relaxed",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/Kv1MZQfd5A7DLwf1Zw3tOaUiwQHGMwmRpjZqOalu_hI.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/Kv1MZQfd5A7DLwf1Zw3tOaUiwQHGMwmRpjZqOalu_hI.png"
+          }
+        }
+      ],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 9,
+      "chatLanguage": {
+        "id": 75000004,
+        "name": "Italiano",
+        "languageCode": "IT"
+      }
+    },
+    {
+      "tag": "#GYRGR2PJ",
+      "name": "REEGEN'D DAVROS",
+      "type": "inviteOnly",
+      "location": {
+        "id": 32000114,
+        "name": "Indonesia",
+        "isCountry": true,
+        "countryCode": "ID"
+      },
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/9h3DGzWU0ULdDXP08PGWe0EgIxr3imnePC7TS_wpSsc.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/9h3DGzWU0ULdDXP08PGWe0EgIxr3imnePC7TS_wpSsc.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/9h3DGzWU0ULdDXP08PGWe0EgIxr3imnePC7TS_wpSsc.png"
+      },
+      "clanLevel": 9,
+      "clanPoints": 6260,
+      "clanBuilderBasePoints": 6218,
+      "clanVersusPoints": 6218,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "always",
+      "warWinStreak": 0,
+      "warWins": 142,
+      "isWarLogPublic": false,
+      "warLeague": {
+        "id": 48000006,
+        "name": "Silver League I"
+      },
+      "members": 6,
+      "labels": [
+        {
+          "id": 56000000,
+          "name": "Clan Wars",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png"
+          }
+        },
+        {
+          "id": 56000001,
+          "name": "Clan War League",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png"
+          }
+        },
+        {
+          "id": 56000004,
+          "name": "Clan Games",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/7qU7tQGERiVITVG0CPFov1-BnFldu4bMN2gXML5bLIU.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/7qU7tQGERiVITVG0CPFov1-BnFldu4bMN2gXML5bLIU.png"
+          }
+        }
+      ],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 10
+    },
+    {
+      "tag": "#2PLL9JP08",
+      "name": "Davros MC",
+      "type": "open",
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/m51W1E1gr2J1eG4V3Y28rRNfvPhZKcUIErOPe_M72kM.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/m51W1E1gr2J1eG4V3Y28rRNfvPhZKcUIErOPe_M72kM.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/m51W1E1gr2J1eG4V3Y28rRNfvPhZKcUIErOPe_M72kM.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 3244,
+      "clanBuilderBasePoints": 4128,
+      "clanVersusPoints": 4128,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 200,
+      "warFrequency": "always",
+      "warWinStreak": 0,
+      "warWins": 2,
+      "warTies": 0,
+      "warLosses": 2,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 6,
+      "labels": [
+        {
+          "id": 56000000,
+          "name": "Clan Wars",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png"
+          }
+        },
+        {
+          "id": 56000002,
+          "name": "Trophy Pushing",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/hNtigjuwJjs6PWhVtVt5HvJgAp4ZOMO8e2nyjHX29sA.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/hNtigjuwJjs6PWhVtVt5HvJgAp4ZOMO8e2nyjHX29sA.png"
+          }
+        },
+        {
+          "id": 56000009,
+          "name": "Donations",
+          "iconUrls": {
+            "small": "https://api-assets.clashofclans.com/labels/64/RauzS-02tv4vWm1edZ-q3gPQGWKGANLZ-85HCw_NVP0.png",
+            "medium": "https://api-assets.clashofclans.com/labels/128/RauzS-02tv4vWm1edZ-q3gPQGWKGANLZ-85HCw_NVP0.png"
+          }
+        }
+      ],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 2
+    },
+    {
+      "tag": "#202QCYQYJ",
+      "name": "Davros McGee",
+      "type": "open",
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/L6nO5hW_eyhp4MoQxdBPi_TJGcHmYnPeZMeVYkBspcI.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/L6nO5hW_eyhp4MoQxdBPi_TJGcHmYnPeZMeVYkBspcI.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/L6nO5hW_eyhp4MoQxdBPi_TJGcHmYnPeZMeVYkBspcI.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 92,
+      "clanBuilderBasePoints": 0,
+      "clanVersusPoints": 0,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "unknown",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 1,
+      "labels": [],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    },
+    {
+      "tag": "#229C8GGLY",
+      "name": "Land of Davros",
+      "type": "inviteOnly",
+      "location": {
+        "id": 32000021,
+        "name": "Australia",
+        "isCountry": true,
+        "countryCode": "AU"
+      },
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/UYQaIuHDtuCAnPAZyMcC0pAMqx8ZI43lJ61yPCAtAwM.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/UYQaIuHDtuCAnPAZyMcC0pAMqx8ZI43lJ61yPCAtAwM.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/UYQaIuHDtuCAnPAZyMcC0pAMqx8ZI43lJ61yPCAtAwM.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 590,
+      "clanBuilderBasePoints": 775,
+      "clanVersusPoints": 775,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "unknown",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 1,
+      "labels": [],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    },
+    {
+      "tag": "#2LYRYRC2",
+      "name": "DavrosTheGreat",
+      "type": "open",
+      "isFamilyFriendly": false,
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/GlAb6NE7w6mWvlF6EEV1UXLfWQp3uw0IrwqyYP30T6M.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/GlAb6NE7w6mWvlF6EEV1UXLfWQp3uw0IrwqyYP30T6M.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/GlAb6NE7w6mWvlF6EEV1UXLfWQp3uw0IrwqyYP30T6M.png"
+      },
+      "clanLevel": 1,
+      "clanPoints": 1054,
+      "clanBuilderBasePoints": 50,
+      "clanVersusPoints": 50,
+      "clanCapitalPoints": 0,
+      "capitalLeague": {
+        "id": 85000000,
+        "name": "Unranked"
+      },
+      "requiredTrophies": 0,
+      "warFrequency": "unknown",
+      "warWinStreak": 0,
+      "warWins": 0,
+      "warTies": 0,
+      "warLosses": 0,
+      "isWarLogPublic": true,
+      "warLeague": {
+        "id": 48000000,
+        "name": "Unranked"
+      },
+      "members": 2,
+      "labels": [],
+      "requiredBuilderBaseTrophies": 0,
+      "requiredVersusTrophies": 0,
+      "requiredTownhallLevel": 1
+    }
+  ],
+  "paging": {
+    "cursors": {}
+  }
+}
