@@ -35,12 +35,16 @@ import java.util.List;
 import java.util.Properties;
 
 import org.jclash.domain.Attack;
+import org.jclash.domain.CapitalRaid;
+import org.jclash.domain.CapitalRaidAttackLog;
+import org.jclash.domain.CapitalRaidMember;
 import org.jclash.domain.ClanInfo;
 import org.jclash.domain.ClanType;
 import org.jclash.domain.CurrentWar;
 import org.jclash.domain.CurrentWarMember;
 import org.jclash.domain.Element;
 import org.jclash.domain.ClanInfoMember;
+import org.jclash.domain.CapitalRaidClan;
 import org.jclash.domain.ClanSearch;
 import org.jclash.domain.PlayerHouse;
 import org.jclash.domain.Search;
@@ -389,4 +393,81 @@ public class ClanTest {
 
     }
 
+    @Test
+    public void clanRaidDeserializedTest() {
+        try {
+
+            ObjectMapper mapper = new ObjectMapper();
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("capital-raid.json");
+            JavaType type = mapper.getTypeFactory().constructParametricType(Search.class, CapitalRaid.class);
+            Search<CapitalRaid> resultSearch = mapper.readValue(inputStream, type);
+            assertNotNull(resultSearch);
+            CapitalRaid raid = resultSearch.getItems().get(0);
+            assertNotNull(raid);
+            assertEquals(raid.getCapitalTotalLoot(), 326877);
+            assertEquals(raid.getMembers().size(), 17);
+            for(CapitalRaidMember raidMember : raid.getMembers()) {
+                assertNotNull(raidMember);
+            }
+
+            assertNotNull(raid.getAttackLog());
+            for(CapitalRaidAttackLog attackLog : raid.getAttackLog()) {
+                assertNotNull(attackLog);
+            }
+
+            assertNotNull(raid.getDefenseLog());
+            for(CapitalRaidAttackLog defenseLog : raid.getDefenseLog()) {
+                assertNotNull(defenseLog);
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+        
+    }
+
+    /**
+     * A simple paging test
+     */
+    @Test
+    public void testClanRaidAPI() {
+
+        try {
+            Search<CapitalRaid> totalResult = this.jcoc.capitalRaidSeason("#VLL2CUVJ", null, null, null);
+            assertNotNull(totalResult);
+            assertNotNull(totalResult.getItems());
+            
+            //Compute the number of pages
+            int limit = 5;
+            int numberOfItems = totalResult.getItems().size();
+            int numberOfPages = numberOfItems / limit;
+            if(numberOfPages % limit != 0) {
+                numberOfPages++;
+            }
+            
+            Search<CapitalRaid> searchPage = this.jcoc.capitalRaidSeason("#VLL2CUVJ", limit, null, null);
+            int currentPage = 0;
+            int totalElements = 0;
+            List<CapitalRaid> pagingRaids = new ArrayList<CapitalRaid>();
+            while(currentPage < numberOfPages) {
+                assertNotNull(searchPage);
+                assertNotNull(searchPage.getItems());
+                List<CapitalRaid> raids = searchPage.getItems();
+                assertTrue(raids.size() <= limit);
+                totalElements+=raids.size();
+                pagingRaids.addAll(pagingRaids); //Add the elements in the page to the list
+                searchPage = this.jcoc.capitalRaidSeason("#VLL2CUVJ", limit, searchPage.getPaging().getCursors().getAfter(), null);
+                currentPage++;
+            }
+            //At the end, the numberOfItems without pagin should be equals to the sum of the totalElements for each page
+            assertEquals(totalElements, numberOfItems);
+            //Check if the two lists are equal
+            assertTrue(totalResult.getItems().containsAll(pagingRaids));
+
+        } catch(JCocException e) {
+            Assert.fail(e.getMessage());
+        }
+        
+    }
 }
