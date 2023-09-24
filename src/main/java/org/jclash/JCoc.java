@@ -19,6 +19,7 @@ package org.jclash;
 import javax.validation.constraints.NotNull;
 
 import org.jclash.coc.ClanService;
+import org.jclash.domain.CapitalRaid;
 import org.jclash.domain.ClanInfo;
 import org.jclash.domain.ClanInfoMember;
 import org.jclash.domain.ClanSearch;
@@ -31,13 +32,16 @@ import org.jclash.security.AuthenticationService;
 import org.jclash.security.Key;
 import org.jclash.utils.Utils;
 
-public class JCoc {
+public final class JCoc {
     
     private String apiToken;
     private String username;
     private String password;
     private boolean isValidToken;
     private static final int MAX_NUMBER_KEYS_ALLOWED = 10;
+
+    // Services
+    private ClanService clanService;
 
     /**
      * Initialize the JCoc for usage the API
@@ -49,7 +53,7 @@ public class JCoc {
         isValidToken = true;
         this.password = null;
         this.username = null;
-
+        clanService = new ClanService(this.apiToken);
     }
 
     /**
@@ -66,6 +70,7 @@ public class JCoc {
             this.apiToken = retrieveCocAPIToken();
             if (this.apiToken != null) {
                 this.isValidToken = true;
+                clanService = new ClanService(this.apiToken);
             }
         } catch (JCocException e) {
             throw new JCocException(e);
@@ -85,8 +90,7 @@ public class JCoc {
      */
     public ClanInfo clanInfo(@NotNull String clanTag) throws JCocException {
         try {
-            ClanService cs = new ClanService(this.apiToken);
-            ClanInfo clan = cs.clanInfo(clanTag);
+            ClanInfo clan = clanService.clanInfo(clanTag);
             return clan;
 
         } catch (Exception e) {
@@ -110,8 +114,7 @@ public class JCoc {
      */
     public Search<ClanInfoMember> clanMembers(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
         try {
-            ClanService cs = new ClanService(this.apiToken);
-            Search<ClanInfoMember> clanMembers = cs.clanMembers(clanTag, limit, after, before);
+            Search<ClanInfoMember> clanMembers = clanService.clanMembers(clanTag, limit, after, before);
             return clanMembers;
 
         } catch (Exception e) {
@@ -135,8 +138,7 @@ public class JCoc {
      */
     public Search<OldWar> warLog(@NotNull String clanTag, int limit, String before, String after) throws JCocException {
         try {
-            ClanService cs = new ClanService(this.apiToken);
-            Search<OldWar> warLog = cs.warLog(clanTag, limit, after, before);
+            Search<OldWar> warLog = clanService.warLog(clanTag, limit, after, before);
             return warLog;
         } catch (Exception e) {
            throw new JCocException(e);
@@ -152,8 +154,7 @@ public class JCoc {
      */
     public CurrentWar currentWar(@NotNull String clanTag) throws JCocException {
         try {
-            ClanService cs = new ClanService(this.apiToken);
-            CurrentWar currentWar = cs.currentWar(clanTag);
+            CurrentWar currentWar = clanService.currentWar(clanTag);
             return currentWar;
         } catch (Exception e) {
            throw new JCocException(e);
@@ -237,8 +238,8 @@ public class JCoc {
                                           String before, String labelIds
                                         ) throws JCocException {
         try {
-            ClanService cs = new ClanService(this.apiToken);
-           return cs.searchClans(
+           
+           return clanService.searchClans(
                                  name, warFrequency, locationId, minMembers, 
                                  maxMembers, minClanPoints, minClanLevel, 
                                  limit, after, before, labelIds
@@ -246,6 +247,28 @@ public class JCoc {
         } catch(Exception e) {
             throw new JCocException(e);
         }
-        
+    }
+
+    /**
+     * Retrieve clan's capital raid seasons
+     * @param clanTag Tag of the clan.
+     * @param limit Limit the number of items returned in the response.
+     * @param after Return only items that occur after this marker. Before marker can 
+     *              be found from the response, inside the 'paging' property. Note that 
+     *              only after or before can be specified for a request, not both.
+     * @param before Return only items that occur before this marker. Before marker can 
+     *               be found from the response, inside the 'paging' property. 
+     *               Note that only after or before can be specified for a request, not both.
+     * @return Retrieve clan's capital raid seasons
+     * @throws JCocException if an error occurs
+     */
+    public Search<CapitalRaid> capitalRaidSeason(@NotNull String clanTag, Integer limit, String after, String before) throws JCocException {
+        try {
+            return clanService.capitalRaidSeason(clanTag, limit, after, before);
+        } catch(Exception e) {
+            throw new JCocException(e);
+        }
+
+
     }
 }
